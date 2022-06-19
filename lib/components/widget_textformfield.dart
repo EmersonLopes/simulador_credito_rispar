@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class WidgetTextFormField extends StatelessWidget {
-  final String labelText;
+  final String? labelText;
   final String? hintText;
   final bool enabled;
   final ValueChanged<String>? onChanged;
@@ -21,7 +21,7 @@ class WidgetTextFormField extends StatelessWidget {
   final String? initialValue;
 
   const WidgetTextFormField({
-    required this.labelText,
+    this.labelText,
     this.hintText,
     this.enabled = true,
     this.onChanged,

@@ -5,6 +5,7 @@ import 'package:simulador_credito_rispar/components/widget_textformfield.dart';
 import 'package:simulador_credito_rispar/utils/app_routes.dart';
 
 import '../../../utils/regex_util.dart';
+import 'label_text.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -44,35 +45,53 @@ class _BodyState extends State<Body> {
               _image(context),
               Container(
                 width: MediaQuery.of(context).size.width,
-                child: const Text("Simule agora",
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      height: 1.5,
-                    )),
+                child: Row(
+                  children: [
+                    const Text("Simule",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          height: 1.5,
+                        )),
+                    Text(" agora",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary,
+                          height: 1.5,
+                        )),
+                  ],
+                ),
               ),
               const SizedBox(height: 4),
               Container(
                 width: MediaQuery.of(context).size.width,
-                child: Text("Crédito rápido, fácil e seguro! :) ",
+                child: const Text("Crédito rápido, fácil e seguro! :) ",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
                       height: 1.5,
                     )),
               ),
-
               const SizedBox(height: 40),
+              const LabelText(
+                firstText: "Qual seu",
+                secondText: " nome completo?",
+              ),
               buildNameFormField(),
               const SizedBox(height: 30),
+              const LabelText(
+                firstText: "E seu",
+                secondText: " e-mail?",
+              ),
               buildEmailFormField(),
               const SizedBox(height: 30),
               WidgetDefaultButtom(
                 text: "Continuar",
                 press: () async {
                   if (_formKey.currentState!.validate()) {
-                    print('ok');
+                    Navigator.pushNamed(context, AppRoutes.REQUEST_AMMOUNT);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Verifique suas informações')));
@@ -104,7 +123,7 @@ class _BodyState extends State<Body> {
   buildNameFormField() {
     return WidgetTextFormField(
       controller: nameController,
-      labelText: "Qual seu nome completo?",
+      // labelText: "Qual seu nome completo?",
       hintText: "Nome completo",
       textCapitalization: TextCapitalization.words,
       keyboardType: TextInputType.name,
@@ -120,7 +139,6 @@ class _BodyState extends State<Body> {
   buildEmailFormField() {
     return WidgetTextFormField(
       controller: emailController,
-      labelText: "E seu Email?",
       hintText: "seuemail@email.com",
       keyboardType: TextInputType.emailAddress,
       // onChanged: signupController.setEmail,
