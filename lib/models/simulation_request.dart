@@ -33,4 +33,9 @@ class SimulationRequest {
     data['has_protected_collateral'] = this.hasProtectedCollateral;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'SimulationRequest{fullname: $fullname, email: $email, ltv: $ltv, amount: $amount, term: $term, hasProtectedCollateral: $hasProtectedCollateral}';
+  }
 }

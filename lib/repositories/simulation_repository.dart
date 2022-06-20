@@ -1,4 +1,4 @@
-import 'package:simulador_credito_rispar/models/simulation_model.dart';
+import 'package:simulador_credito_rispar/models/simulation_request.dart';
 import 'package:simulador_credito_rispar/repositories/simulation_repository_interface.dart';
 import 'package:simulador_credito_rispar/services/client_http_interface.dart';
 

@@ -37,7 +37,7 @@ class _BodyState extends State<Body> {
                           color: Theme.of(context).colorScheme.secondary,                          
                           height: 1.5,
                         )),
-                    Text(" você precisa?",
+                    const Text(" você precisa?",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:simulador_credito_rispar/components/widget_default_buttom.dart';
-import 'package:simulador_credito_rispar/components/widget_textformfield.dart';
+import 'package:simulador_credito_rispar/controllers/simulation_controller.dart';
 import 'package:simulador_credito_rispar/utils/app_routes.dart';
 
-import '../../../utils/regex_util.dart';
+import 'email_text_field.dart';
 import 'label_text.dart';
+import 'name_text_field.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -15,20 +16,11 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   final _formKey = GlobalKey<FormState>();
 
-  late TextEditingController nameController;
-
-  late TextEditingController emailController;
+  late SimulationController simulationController;
 
   @override
   void initState() {
-    nameController = TextEditingController();
-    emailController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    emailController.dispose();
+    simulationController = context.read<SimulationController>();
   }
 
   @override
@@ -79,13 +71,13 @@ class _BodyState extends State<Body> {
                 firstText: "Qual seu",
                 secondText: " nome completo?",
               ),
-              buildNameFormField(),
+              NameTextField(),
               const SizedBox(height: 30),
               const LabelText(
                 firstText: "E seu",
                 secondText: " e-mail?",
               ),
-              buildEmailFormField(),
+              EmailTextField(),
               const SizedBox(height: 30),
               WidgetDefaultButtom(
                 text: "Continuar",
@@ -117,36 +109,6 @@ class _BodyState extends State<Body> {
           image: AssetImage("assets/images/user.png"),
         ),
       ),
-    );
-  }
-
-  buildNameFormField() {
-    return WidgetTextFormField(
-      controller: nameController,
-      // labelText: "Qual seu nome completo?",
-      hintText: "Nome completo",
-      textCapitalization: TextCapitalization.words,
-      keyboardType: TextInputType.name,
-      // onChanged: signupController.setName,
-      validator: (value) {
-        if (value!.isEmpty) return "Nome inválido";
-
-        return null;
-      },
-    );
-  }
-
-  buildEmailFormField() {
-    return WidgetTextFormField(
-      controller: emailController,
-      hintText: "seuemail@email.com",
-      keyboardType: TextInputType.emailAddress,
-      // onChanged: signupController.setEmail,
-      validator: (value) {
-        if (!RegexUtil.isEmailValid(value!)) return 'E-mail inválido';
-
-        return null;
-      },
     );
   }
 }

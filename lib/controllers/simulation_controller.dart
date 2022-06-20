@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:simulador_credito_rispar/models/simulation_model.dart';
+import 'package:simulador_credito_rispar/models/simulation_request.dart';
 import 'package:simulador_credito_rispar/repositories/simulation_repository.dart';
 import 'package:simulador_credito_rispar/repositories/simulation_repository_interface.dart';
 

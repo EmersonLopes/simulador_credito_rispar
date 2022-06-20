@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
 import 'package:simulador_credito_rispar/components/widget_textformfield.dart';
+import 'package:simulador_credito_rispar/controllers/simulation_controller.dart';
 
-class AmmountField extends StatelessWidget {
+class AmmountField extends StatefulWidget {
   AmmountField({Key? key}) : super(key: key);
 
+  @override
+  State<AmmountField> createState() => _AmmountFieldState();
+}
+
+class _AmmountFieldState extends State<AmmountField> {
   final double _fontSize = 30.0;
+
+  late SimulationController simulationController;
+
+  @override
+  void initState() {
+    simulationController = context.read<SimulationController>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,20 +53,21 @@ class AmmountField extends StatelessWidget {
                       value.replaceAll('.', '').replaceAll(',', '.')) ==
                   null)) return 'Valor inválido';
 
-                  double? valor = double.tryParse(
-                      value.replaceAll('.', '').replaceAll(',', '.'));
+          double? valor =
+              double.tryParse(value.replaceAll('.', '').replaceAll(',', '.'));
 
-                   if (valor! < 500 || valor > 300000) return 'Valor deve estar entre R\$500 e R\$300.000';
+          if (valor! < 500 || valor > 300000)
+            return 'Valor deve estar entre R\$500 e R\$300.000';
 
           return null;
         },
         onChanged: (value) {
           try {
-            // supplyController.supplyToSave.price =
-            //     num.parse(value.replaceAll('.', '').replaceAll(',', '.'))
-            //         as double?;
+            simulationController.simulationRequest.amount =
+                double.parse(value.replaceAll('.', '').replaceAll(',', '.'));
+            print(simulationController.simulationRequest.amount);
           } on FormatException {
-            // supplyController.supplyToSave.price = 0;
+            simulationController.simulationRequest.amount = 0;
           }
         },
       ),
