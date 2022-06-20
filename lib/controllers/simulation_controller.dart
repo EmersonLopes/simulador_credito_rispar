@@ -20,15 +20,13 @@ abstract class SimulationControllerBase with Store {
 
   SimulationRequest simulationRequest = SimulationRequest();
 
-  @action
-  Future saveSimulation() async {
+  saveSimulation() async {
     try {
       stateSimulation = StateController.loading;
 
       await simulationRepository.postSimulation(simulationRequest);
 
-      stateSimulation = StateController.success;
-      return null;
+      stateSimulation = StateController.error;
     } catch (e) {
       stateSimulation = StateController.error;
     }

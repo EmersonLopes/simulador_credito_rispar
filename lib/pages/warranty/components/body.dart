@@ -90,7 +90,7 @@ class _BodyState extends State<Body> {
               Container(
                   width: MediaQuery.of(context).size.width,
                   child: TextButton(
-                      onPressed: () async => await postSimulation(),
+                      onPressed: () async => postSimulation(),
                       child: Text(
                         'Continuar sem garantia',
                         style: TextStyle(

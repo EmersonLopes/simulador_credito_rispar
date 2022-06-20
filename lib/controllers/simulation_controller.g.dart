@@ -25,14 +25,6 @@ mixin _$SimulationController on SimulationControllerBase, Store {
     });
   }
 
-  late final _$saveSimulationAsyncAction =
-      AsyncAction('SimulationControllerBase.saveSimulation', context: context);
-
-  @override
-  Future<dynamic> saveSimulation() {
-    return _$saveSimulationAsyncAction.run(() => super.saveSimulation());
-  }
-
   @override
   String toString() {
     return '''

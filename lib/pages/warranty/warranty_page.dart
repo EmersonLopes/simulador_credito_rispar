@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:simulador_credito_rispar/controllers/enum_state_controller.dart';
 import 'package:simulador_credito_rispar/controllers/simulation_controller.dart';
-import 'package:simulador_credito_rispar/pages/warranty/components/loading_simulation.dart';
 
+import 'components/loading_simulation.dart';
 import 'components/body.dart';
+import 'components/error_simulation.dart';
 
 class WarrantyPage extends StatefulWidget {
   const WarrantyPage({Key? key}) : super(key: key);
@@ -30,11 +29,20 @@ class _WarrantyPageState extends State<WarrantyPage> {
         appBar: AppBar(elevation: 0),
         body: Observer(
           builder: (BuildContext context) {
-            if (simulationController.stateSimulation ==
-                StateController.loading) {
-              return const LoadingSimulation();
+            print('>>>> ${simulationController.stateSimulation}');
+            switch (simulationController.stateSimulation) {
+              case StateController.loading:
+                return LoadingSimulation();
+              case StateController.error:
+                return ErrorSimulation(
+                  onButtonClick: () async {
+                    simulationController.saveSimulation();
+                  },
+                );
+              case StateController.success:
+              default:
+                return Body();
             }
-            return const Body();
           },
         ));
   }
