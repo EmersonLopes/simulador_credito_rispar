@@ -32,64 +32,40 @@ class _BodyState extends State<Body> {
           height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.symmetric(horizontal: 26),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _image(context),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  children: [
-                    const Text("Simule",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          height: 1.5,
-                        )),
-                    Text(" agora",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.secondary,
-                          height: 1.5,
-                        )),
-                  ],
+              _simuleAgora(),
+              Column(
+                children: [
+                  const LabelText(
+                    firstText: "Qual seu",
+                    secondText: " nome completo?",
+                  ),
+                  const NameTextField(),
+                  const SizedBox(height: 30),
+                  const LabelText(
+                    firstText: "E seu",
+                    secondText: " e-mail?",
+                  ),
+                  const EmailTextField(),
+                  const SizedBox(height: 30),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: WidgetDefaultButtom(
+                  text: "Continuar",
+                  press: () async {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.pushNamed(context, AppRoutes.REQUEST_AMMOUNT);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Verifique suas informações')));
+                    }
+                  },
                 ),
               ),
-              const SizedBox(height: 4),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: const Text("Crédito rápido, fácil e seguro! :) ",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      height: 1.5,
-                    )),
-              ),
-              const SizedBox(height: 40),
-              const LabelText(
-                firstText: "Qual seu",
-                secondText: " nome completo?",
-              ),
-              NameTextField(),
-              const SizedBox(height: 30),
-              const LabelText(
-                firstText: "E seu",
-                secondText: " e-mail?",
-              ),
-              EmailTextField(),
-              const SizedBox(height: 30),
-              WidgetDefaultButtom(
-                text: "Continuar",
-                press: () async {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, AppRoutes.REQUEST_AMMOUNT);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Verifique suas informações')));
-                  }
-                },
-              ),
+              
             ],
           ),
         ),
@@ -109,6 +85,45 @@ class _BodyState extends State<Body> {
           image: AssetImage("assets/images/user.png"),
         ),
       ),
+    );
+  }
+
+  _simuleAgora() {
+    return Column(
+      children: [
+        _image(context),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              const Text("Simule",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    height: 1.5,
+                  )),
+              Text(" agora",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.secondary,
+                    height: 1.5,
+                  )),
+            ],
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          child: const Text("Crédito rápido, fácil e seguro! :) ",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+              )),
+        ),
+        const SizedBox(height: 40),
+      ],
     );
   }
 }

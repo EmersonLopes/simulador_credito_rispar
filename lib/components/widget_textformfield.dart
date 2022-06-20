@@ -19,6 +19,7 @@ class WidgetTextFormField extends StatelessWidget {
   final Widget? suffix;
   final int? maxLength;
   final String? initialValue;
+  final bool autofocus;
 
   const WidgetTextFormField({
     this.labelText,
@@ -38,6 +39,7 @@ class WidgetTextFormField extends StatelessWidget {
     this.suffix,
     this.maxLength,
     this.initialValue,
+    this.autofocus = false
   });
 
   @override
@@ -48,6 +50,7 @@ class WidgetTextFormField extends StatelessWidget {
       maxLength: maxLength,
       textCapitalization: textCapitalization,
       initialValue: initialValue,
+      autofocus: autofocus,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,

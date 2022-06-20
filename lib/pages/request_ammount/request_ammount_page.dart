@@ -12,14 +12,7 @@ class _RequestAmmountPageState extends State<RequestAmmountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(elevation: 0, actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, AppRoutes.USER, (route) => false);
-              },
-              icon: Icon(Icons.close))
-        ]),
+        appBar: AppBar(elevation: 0),
         body: const Body());
   }
 }

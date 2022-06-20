@@ -26,7 +26,7 @@ class _AmmountFieldState extends State<AmmountField> {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: WidgetTextFormField(
-        // hintText: "Insira um valor",
+        autofocus: true,
         prefix: Text(
           'R\$ ',
           style: TextStyle(
