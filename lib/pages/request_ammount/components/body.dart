@@ -22,15 +22,15 @@ class _BodyState extends State<Body> {
       child: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height * 0.8,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               _quantoPrecisa(),
-              const SizedBox(height: 4),
+
               AmmountField(),
-              const SizedBox(height: 12.0),
+
               WidgetDefaultButtom(
                 text: "Continuar",
                 press: () async {
@@ -42,7 +42,7 @@ class _BodyState extends State<Body> {
                   }
                 },
               ),
-              const SizedBox(height: 10.0),
+
             ],
           ),
         ),
