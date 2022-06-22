@@ -56,8 +56,8 @@ class _AmmountFieldState extends State<AmmountField> {
           double? valor =
               double.tryParse(value.replaceAll('.', '').replaceAll(',', '.'));
 
-          if (valor! < 500 || valor > 300000)
-            return 'Valor deve estar entre R\$500 e R\$300.000';
+          if (valor! < 1000 || valor > 300000)
+            return 'Valor deve estar entre R\$1.000 e R\$300.000';
 
           return null;
         },

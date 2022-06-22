@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simulador_credito_rispar/components/widget_default_buttom.dart';
+import 'package:simulador_credito_rispar/controllers/simulation_controller.dart';
+import 'package:simulador_credito_rispar/models/simulation_model.dart';
 import 'package:simulador_credito_rispar/utils/app_routes.dart';
 
 import 'tile_result.dart';
@@ -12,11 +15,21 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  late SimulationController simulationController;
+  SimulationModel? model;
+
+  @override
+  void initState() {
+    simulationController = context.read<SimulationController>();
+    model = simulationController.simulationModel;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.0),
       alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height * 0.85,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -33,16 +46,37 @@ class _BodyState extends State<Body> {
           ),
           Column(
             children: [
-              TileResult(label: "Valor escolhido", result: 'R\$ 25.000'),
-              TileResult(label: "Garantia", result: 'B 0.34789823'),
-              TileResult(label: "Taxa de juros", result: '0.79% a.m'),
-              TileResult(label: "Percentual de garantia", result: '35%'),
-              TileResult(label: "IOF", result: 'R\$ 239,32'),
-              TileResult(label: "Tarifa da plataforma", result: 'R\$ 385,14'),
-              TileResult(label: "Total financiado", result: 'R\$ 26.324,32'),
-              TileResult(label: "CET mensal", result: '2,69%'),
-              TileResult(label: "CET anual", result: '37,46%'),
-              TileResult(label: "Cotação do BTC", result: 'R\$ 322,356.71'),
+              TileResult(
+                  label: "Valor escolhido",
+                  result: 'R\$ ${model?.netValue?.toStringAsFixed(2)}'),
+              TileResult(
+                  label: "Garantia",
+                  result:
+                      '₿ ${model?.getBitcoinFromSats().toStringAsFixed(8)}'),
+              TileResult(
+                  label: "Taxa de juros",
+                  result: '${model?.interestRate?.toStringAsFixed(2)}% a.m'),
+              TileResult(
+                  label: "Percentual de garantia", result: '${model?.ltv}%'),
+              TileResult(
+                  label: "IOF",
+                  result: 'R\$ ${model?.iofFee?.toStringAsFixed(2)}'),
+              TileResult(
+                  label: "Tarifa da plataforma",
+                  result: 'R\$ ${model?.originationFee?.toStringAsFixed(2)}'),
+              TileResult(
+                  label: "Total financiado",
+                  result: 'R\$ ${model?.contractValue?.toStringAsFixed(2)}'),
+              TileResult(
+                  label: "CET mensal",
+                  result: '${model?.monthlyRate?.toStringAsFixed(2)}%'),
+              TileResult(
+                  label: "CET anual",
+                  result: '${model?.annualRate?.toStringAsFixed(2)}%'),
+              TileResult(
+                  label: "Cotação do BTC",
+                  result:
+                      'R\$ ${model?.collateralUnitPrice?.toStringAsFixed(2)}'),
               SizedBox(height: 6.0),
             ],
           ),
@@ -51,9 +85,7 @@ class _BodyState extends State<Body> {
               press: () {
                 Navigator.pushNamed(context, AppRoutes.USER);
               }),
-              SizedBox(
-            height: 8.0,
-          ),
+
         ],
       ),
     );

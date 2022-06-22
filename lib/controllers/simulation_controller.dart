@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:simulador_credito_rispar/models/simulation_model.dart';
 import 'package:simulador_credito_rispar/models/simulation_request.dart';
 import 'package:simulador_credito_rispar/repositories/simulation_repository.dart';
 import 'package:simulador_credito_rispar/repositories/simulation_repository_interface.dart';
@@ -20,14 +22,19 @@ abstract class SimulationControllerBase with Store {
 
   SimulationRequest simulationRequest = SimulationRequest();
 
-  saveSimulation() async {
+  SimulationModel? simulationModel;
+
+  Future<SimulationModel?> saveSimulation() async {
     try {
       stateSimulation = StateController.loading;
 
-      await simulationRepository.postSimulation(simulationRequest);
+      simulationModel =
+          await simulationRepository.postSimulation(simulationRequest);
 
-      stateSimulation = StateController.error;
+      stateSimulation = StateController.success;
+      return simulationModel;
     } catch (e) {
+      debugPrint(e.toString());
       stateSimulation = StateController.error;
     }
   }

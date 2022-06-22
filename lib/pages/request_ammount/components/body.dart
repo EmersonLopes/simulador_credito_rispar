@@ -77,7 +77,7 @@ class _BodyState extends State<Body> {
             width: MediaQuery.of(context).size.width,
             child: const LabelText(
               firstText: "Insira um valor entre",
-              secondText: " R\$500 a R\$300.000",
+              secondText: " R\$1.000 a R\$300.000",
             ),
           ),
         ],

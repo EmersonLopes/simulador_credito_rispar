@@ -16,19 +16,18 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          elevation: 0, title: WidgetProgressIndicator(perctValue: 1.0,),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, AppRoutes.USER, (route) => false);
-              },
-              icon: Icon(Icons.close))
-        ]),body
-    :
-    Body
-    (
-    )
-    );
+            elevation: 0,
+            title: WidgetProgressIndicator(
+              perctValue: 1.0,
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, AppRoutes.USER, (route) => false);
+                  },
+                  icon: Icon(Icons.close))
+            ]),
+        body: Body());
   }
 }
