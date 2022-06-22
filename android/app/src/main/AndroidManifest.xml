@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.rispar.simulador_credito_rispar">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="simulador_credito_rispar"
         android:name="${applicationName}"

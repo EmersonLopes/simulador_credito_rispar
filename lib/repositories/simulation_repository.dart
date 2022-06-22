@@ -10,10 +10,6 @@ class SimulationRepository implements ISimulationRepository {
 
   SimulationRepository(this.clientHttp);
 
-  Map<String, String> headers = {
-    "Content-Type": "application/json",
-  };
-
   @override
   Future<SimulationModel> postSimulation(
       SimulationRequest simulationRequest) async {

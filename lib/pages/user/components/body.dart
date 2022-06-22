@@ -36,19 +36,19 @@ class _BodyState extends State<Body> {
             children: [
               _simuleAgora(),
               Column(
-                children: [
-                  const LabelText(
+                children: const [
+                  LabelText(
                     firstText: "Qual seu",
                     secondText: " nome completo?",
                   ),
-                  const NameTextField(),
-                  const SizedBox(height: 30),
-                  const LabelText(
+                  NameTextField(),
+                  SizedBox(height: 30),
+                  LabelText(
                     firstText: "E seu",
                     secondText: " e-mail?",
                   ),
-                  const EmailTextField(),
-                  const SizedBox(height: 30),
+                  EmailTextField(),
+                  SizedBox(height: 30),
                 ],
               ),
               Padding(
@@ -91,6 +91,7 @@ class _BodyState extends State<Body> {
   _simuleAgora() {
     return Column(
       children: [
+        SizedBox(height: 16.0,),
         _image(context),
         Container(
           width: MediaQuery.of(context).size.width,
